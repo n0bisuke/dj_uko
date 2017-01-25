@@ -1,5 +1,4 @@
 node_modules
 .DS_Store
-milk.js
 config.js
 npm-debug.log
