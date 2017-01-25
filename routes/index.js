@@ -26,8 +26,8 @@ function getIdByUrl(url){
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-    logging(`こんにちは!!`);
-    res.send(`こんにちは!!`);
+    logging(`top page`);
+    res.send(`top page`);
 });
 
 /* POST LINE */
