@@ -9,7 +9,7 @@ const ds = milkcocoa.dataStore('ytdata');
 const http = require('http');
 const https = require('https');
 const crypto = require('crypto');
-const imageUpload = require('./libs/upload');
+// const imageUpload = require('./libs/upload');
 
 const HOST = 'api.line.me'; 
 const REPLY_PATH = '/v2/bot/message/reply';//リプライ用
@@ -143,6 +143,16 @@ function getIdByUrl(url){
     }
 }
 
+/**
+ * 画像アップロード処理
+ */
+function imageUpload(req,res){    
+    console.log(res);
+}
+
+/**
+ * ロギング
+ */
 function logging(log){
     if(PORT === 3000){
         console.log(log);
