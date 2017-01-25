@@ -18,6 +18,7 @@ var player;
 var videoList = ['PDSkFeMVNFs','ZFoJYI7Q4iA']; 
 var videoIndex = 0;
 var error_count = 0; //不正なIDが来て読み込めない場合
+var passEvent;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('myplayer', {
@@ -37,7 +38,6 @@ function onPlayerReady(event) {
 }
 
 function onPlayerStateChange(event) {
-
     console.log(event.data,YT.PlayerState);
     if (event.data === YT.PlayerState.ENDED) {
         nextPlay(event);
@@ -48,6 +48,8 @@ function onPlayerStateChange(event) {
     }else{
         stopTimer();
     }
+
+    passEvent = event;
 }
 
 function nextPlay(event){
@@ -80,6 +82,11 @@ ds.on('send',function(sended,err){
     if(sended.value.videoId === 'リロード'){
         location.reload();
         return;
+    }
+
+    if(sended.value.videoId === 'スキップ'){
+        nextPlay(passEvent);
+        console.log('スキップ');
     }
     console.log('うけとり');
     console.log(sended.value.videoId);

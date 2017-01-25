@@ -2,6 +2,7 @@
 
 const MilkCocoa = require('milkcocoa');
 const MC_ID = process.env.MC_ID || require(`./config`).MC_ID;
+
 const milkcocoa = new MilkCocoa(`${MC_ID}.mlkcca.com`);
 const ds = milkcocoa.dataStore('ytdata');
 ds.send({mes:'起動!'});
@@ -16,6 +17,8 @@ const CH_SECRET = process.env.CH_SECRET || require(`./config`).CH_SECRET; //Chan
 const CH_ACCESS_TOKEN = process.env.CH_ACCESS_TOKEN || require(`./config`).CH_ACCESS_TOKEN; //Channel Access Tokenを指定
 const SIGNATURE = crypto.createHmac('sha256', CH_SECRET);
 const PORT = process.env.PORT || 3000;
+
+console.log('認証情報:',MC_ID,CH_SECRET,CH_ACCESS_TOKEN);
 
 /**
  * httpリクエスト部分
@@ -83,17 +86,27 @@ http.createServer((req, res) => {
                         console.log(`リロード!!`);
                         return;
                     });
-                }
-                if(getIdByUrl(WebhookEventObject.message.text)){
+                }else if(WebhookEventObject.message.text === 'スキップ'){
+                    ds.send({videoId:'スキップ'},(err,sended)=>{
+                        console.log(`スキップ!!`);
+                        return;
+                    });
                     SendMessageObject = [{
                         type: 'text',
-                        text: WebhookEventObject.message.text+` を追加したよ！`
+                        text: `スキップします`
                     }];
                 }else{
-                    SendMessageObject = [{
-                        type: 'text',
-                        text: `IDを見つけられませんよ`
-                    }];
+                    if(getIdByUrl(WebhookEventObject.message.text)){
+                        SendMessageObject = [{
+                            type: 'text',
+                            text: WebhookEventObject.message.text+` を追加したよ！`
+                        }];
+                    }else{
+                        SendMessageObject = [{
+                            type: 'text',
+                            text: `IDを見つけられませんよ`
+                        }];
+                    }
                 }
             }
             client(WebhookEventObject.replyToken, SendMessageObject)
@@ -113,11 +126,11 @@ http.createServer((req, res) => {
 
 console.log(`Server running at ${PORT}`);
 
-
 //https://www.youtube.com/watch?v=EeRwJsjyoZs -> EeRwJsjyoZs
 function getIdByUrl(url){
-    if(url.match(/youtube\.com\/watch\?v=(.*)/i)){
-        let videoId = url.match(/www\.youtube\.com\/watch\?v=(.*)/i)[1];
+    let re = /youtube\.com\/watch\?v=(.*)/i;
+    if(url.match(re)){
+        let videoId = url.match(re)[1];
         console.log('IDげと',videoId);
         ds.send({videoId:videoId},(err,sended)=>{
             console.log(err,sended);
