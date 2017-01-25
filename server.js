@@ -4,7 +4,6 @@ const MilkCocoa = require('milkcocoa');
 const milkcocoa = new MilkCocoa(`${process.env.MC_ID}.mlkcca.com`);
 const ds = milkcocoa.dataStore('ytdata');
 
-
 const http = require('http');
 const https = require('https');
 const crypto = require('crypto');
@@ -29,7 +28,8 @@ const client = (replyToken, SendMessageObject) => {
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
             'X-Line-Signature': SIGNATURE,
-            'Authorization': `Bearer ${CH_ACCESS_TOKEN}`
+            'Authorization': `Bearer ${CH_ACCESS_TOKEN}`,
+            'Content-Length': Buffer.byteLength(postDataStr)
         }
     };
 
@@ -55,12 +55,12 @@ const client = (replyToken, SendMessageObject) => {
 
 http.createServer((req, res) => {    
     if(req.url !== '/' || req.method !== 'POST'){
-        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.writeHead(200, {'Content-Type': 'text/html'});
         res.end(`こんにちは?!: ${process.env.CH_ACCESS_TOKEN} / ${process.env.CH_SECRET} / ${process.env.MC_ID}`);
     }
 
     if(req.method === 'GET'){
-        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.writeHead(200, {'Content-Type': 'text/html'});
         res.end('こんにちは'+process.env.CH_ACCESS_TOKEN);
     }
 
@@ -102,7 +102,10 @@ http.createServer((req, res) => {
             client(WebhookEventObject.replyToken, SendMessageObject)
             .then((body)=>{
                 console.log(body);
-            },(e)=>{console.log(e)});
+            },(e)=>{
+                console.log(e);
+                ds.send({e});
+            });
         }
 
         res.writeHead(200, {'Content-Type': 'text/plain'});
