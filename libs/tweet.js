@@ -2,11 +2,11 @@
 
 const path = require('path');
 const Twitter = require('twitter');
-const KEYS = require('../config').twitter || {
-    consumer_key: process.env.consumer_key,
-    consumer_secret: process.env.consumer_secret,
-    access_token_key: process.env.access_token_key,
-    access_token_secret: process.env.access_token_secret
+const KEYS = {
+    consumer_key: process.env.consumer_key || require('../config').twitter.consumer_key,
+    consumer_secret: process.env.consumer_secret || require('../config').twitter.consumer_secret,
+    access_token_key: process.env.access_token_key || require('../config').twitter.access_token_key,
+    access_token_secret: process.env.access_token_secret || require('../config').twitter.access_token_secret,
 };
 const client = new Twitter(KEYS);
 const getTime = require('./time');
