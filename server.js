@@ -120,7 +120,7 @@ console.log(`Server running at ${PORT}`);
 
 //https://www.youtube.com/watch?v=EeRwJsjyoZs -> EeRwJsjyoZs
 function getIdByUrl(url){
-    if(url.match(/www\.youtube\.com\/watch\?v=(.*)/i)){
+    if(url.match(/youtube\.com\/watch\?v=(.*)/i)){
         let videoId = url.match(/www\.youtube\.com\/watch\?v=(.*)/i)[1];
         console.log('IDげと',videoId);
         ds.send({videoId:videoId},(err,sended)=>{
