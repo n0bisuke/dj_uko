@@ -3,17 +3,16 @@
 const express = require('express');
 const router = express.Router();
 
+const logging = require('../libs/logging');
 const httpRequest = require('../libs/httpRequest');
 const ds = require('../modules/milkcocoaAction'); //Milkcocoa呼び出し
-
-const logging = require('../libs/logging');
 
 //https://www.youtube.com/watch?v=EeRwJsjyoZs -> EeRwJsjyoZs
 function getIdByUrl(url){
     let re = /youtube\.com\/watch\?v=(.*)/i;
     if(url.match(re)){
         let videoId = url.match(re)[1];
-        console.log('IDげと',videoId);        
+        console.log('IDげと',videoId);     
         ds.send({videoId:videoId},(err,sended)=>{
             console.log(err,sended);
         });
