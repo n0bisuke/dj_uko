@@ -64,8 +64,10 @@ http.createServer((req, res) => {
         res.end(`こんにちは`);
     }
 
-    if(req.url !== '/uploard' || req.method !== 'POST'){
+    if(req.url === '/uploard' && req.method === 'POST'){
+        console.log(req.url);
         imageUpload(req,res);
+        return;
     }
 
     let body = '';
@@ -147,7 +149,9 @@ function getIdByUrl(url){
  * 画像アップロード処理
  */
 function imageUpload(req,res){    
-    console.log(res);
+    // console.log(res);
+
+    return;
 }
 
 /**
@@ -157,6 +161,6 @@ function logging(log){
     if(PORT === 3000){
         console.log(log);
     }else{
-        ds.send(log);
+        ds.send({mes:log});
     }
 }
