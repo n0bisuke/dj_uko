@@ -9,10 +9,9 @@ const KEYS = require('../config').twitter || {
     access_token_secret: process.env.access_token_secret
 };
 const client = new Twitter(KEYS);
+const time = require('./time');
 
-let jikan= new Date();
-let tweet = `${jikan.getHours()}時${jikan.getMinutes()}分${jikan.getSeconds()}秒`;
-tweet += '私は今○○をしています。';
+tweet += '私は今○○をしています。 ${time()}';
 
 let newPath = path.resolve(path.join(__dirname, '../uploads', 'img.png'));
 let data = require('fs').readFileSync(newPath);

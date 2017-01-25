@@ -11,8 +11,9 @@ const milkcocoa = new MilkCocoa(`${MC_ID}.mlkcca.com`);
 const ds = milkcocoa.dataStore('ytdata');
 
 const httpRequest = require('../libs/httpRequest');
+const time = require('../libs/time');
 
-logging(`起動! \n認証情報: ${MC_ID}`);
+logging(`起動! \n認証情報: ${MC_ID} ${time()}`);
 /**
  * ロギング
  */
