@@ -1,7 +1,8 @@
 'use strict';
 
 const MilkCocoa = require('milkcocoa');
-const milkcocoa = new MilkCocoa(`${process.env.MC_ID}.mlkcca.com`);
+const MC_ID = process.env.MC_ID || require(`./config`).MC_ID;
+const milkcocoa = new MilkCocoa(`${MC_ID}.mlkcca.com`);
 const ds = milkcocoa.dataStore('ytdata');
 ds.send({mes:'起動!'});
 
@@ -11,8 +12,8 @@ const crypto = require('crypto');
 
 const HOST = 'api.line.me'; 
 const REPLY_PATH = '/v2/bot/message/reply';//リプライ用
-const CH_SECRET = process.env.CH_SECRET; //Channel Secretを指定
-const CH_ACCESS_TOKEN = process.env.CH_ACCESS_TOKEN; //Channel Access Tokenを指定
+const CH_SECRET = process.env.CH_SECRET || require(`./config`).CH_SECRET; //Channel Secretを指定
+const CH_ACCESS_TOKEN = process.env.CH_ACCESS_TOKEN || require(`./config`).CH_ACCESS_TOKEN; //Channel Access Tokenを指定
 const SIGNATURE = crypto.createHmac('sha256', CH_SECRET);
 const PORT = process.env.PORT || 3000;
 
