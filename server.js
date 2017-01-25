@@ -59,6 +59,11 @@ http.createServer((req, res) => {
         res.end('');
     }
 
+    if(req.method === 'GET'){
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end('こんにちは'+process.env.CH_ACCESS_TOKEN);
+    }
+
     let body = '';
     req.on('data', (chunk) => {
         body += chunk;
