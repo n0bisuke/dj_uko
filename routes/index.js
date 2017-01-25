@@ -43,7 +43,7 @@ function getIdByUrl(url){
 /* GET home page. */
 router.get('/', (req, res, next) => {
     logging(`こんにちは!!`);
-    res.send('top Page');
+    res.send(`こんにちは!!`);
 });
 
 /* POST LINE */
