@@ -10,7 +10,7 @@ ds.send({mes:'起動!'});
 const http = require('http');
 const https = require('https');
 const crypto = require('crypto');
-const imageUpload = require('');
+const imageUpload = require('./libs/upload');
 
 const HOST = 'api.line.me'; 
 const REPLY_PATH = '/v2/bot/message/reply';//リプライ用
