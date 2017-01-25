@@ -15,3 +15,23 @@ module.exports = {
 ```
 
 それぞれの値はなんとかして仕入れてください
+
+## コマンド
+
+* PaaSのログをチェック
+
+```
+npm run debug
+```
+
+* ローカル起動
+
+```
+npm start
+```
+
+* デプロイ
+
+```
+npm run deploy
+```

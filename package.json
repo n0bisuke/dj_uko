@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "deploy": "git add -A && git commit -m 'dj_update' && git push origin master",
+    "debug": "node milkdebug.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
