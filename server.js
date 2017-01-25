@@ -6,7 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const index = require('./routes/index');
-const upload = require('./routes/upload');
+const upload = require('./routes/fileupload');
 
 const app = express();
 app.use(bodyParser.json());
