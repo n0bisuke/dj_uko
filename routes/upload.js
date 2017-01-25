@@ -2,14 +2,13 @@
 
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
+const tw = require('../libs/tweet');
 
-var multer = require('multer');
-var upload = multer({ dest: './uploads/' }).single('thumbnail');
-
+const upload = require('multer')({dest:'./uploads/'}).single('thumbnail');
 
 /* GET home page. */
-router.get('/', (req, res, next) => {
-});
+router.get('/', (req, res, next) => {});
 
 /* POST 画像アップロード */
 router.post('/', (req, res, next) => {
@@ -19,7 +18,15 @@ router.post('/', (req, res, next) => {
             // res.send("Failed to write " + req.file.destination + " with " + err);
         } else {
             console.log(req.file);
-            res.send(`uploaded${req.file.originalname} as ${req.file.filename}. Size ${req.file.size}`);
+
+            fs.rename(req.file.path, `./uploads/img.png`, (err) => {
+                if(err){
+                    // fs.unlink(req.file.originalname);
+                    // fs.rename(req.file.filename, req.file.originalname);
+                }
+                tw();
+                // res.send(`uploaded${req.file.originalname} as ${req.file.filename}. Size ${req.file.size}`);
+            });
         }
     });
 });
