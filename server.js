@@ -12,7 +12,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', index);
-// app.use('/upload', upload);
+app.use('/upload', upload);
 
 app.listen(PORT);
 console.log(`Server running at ${PORT}`);

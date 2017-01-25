@@ -18,7 +18,6 @@ router.post('/', (req, res, next) => {
             // res.send("Failed to write " + req.file.destination + " with " + err);
         } else {
             console.log(req.file);
-
             fs.rename(req.file.path, `./uploads/img.png`, (err) => {
                 if(err){
                     // fs.unlink(req.file.originalname);
