@@ -10,6 +10,7 @@ ds.send({mes:'起動!'});
 const http = require('http');
 const https = require('https');
 const crypto = require('crypto');
+const imageUpload = require('');
 
 const HOST = 'api.line.me'; 
 const REPLY_PATH = '/v2/bot/message/reply';//リプライ用
@@ -64,6 +65,10 @@ http.createServer((req, res) => {
         res.end(`こんにちは`);
     }
 
+    if(req.url !== '/uploard' || req.method !== 'POST'){
+        imageUpload(req,res);
+    }
+
     let body = '';
     req.on('data', (chunk) => {
         body += chunk;
@@ -102,10 +107,7 @@ http.createServer((req, res) => {
                             text: WebhookEventObject.message.text+` を追加したよ！`
                         }];
                     }else{
-                        SendMessageObject = [{
-                            type: 'text',
-                            text: `IDを見つけられませんよ`
-                        }];
+                        SendMessageObject = [];
                     }
                 }
             }
