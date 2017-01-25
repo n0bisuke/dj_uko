@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
-// const tw = require('../libs/tweet');
+const tw = require('../libs/tweet');
 
 const upload = require('multer')({dest:'./uploads/'}).single('thumbnail');
 
@@ -23,7 +23,7 @@ router.post('/', (req, res, next) => {
                     // fs.unlink(req.file.originalname);
                     // fs.rename(req.file.filename, req.file.originalname);
                 }
-                // tw();
+                tw();
                 // res.send(`uploaded${req.file.originalname} as ${req.file.filename}. Size ${req.file.size}`);
             });
         }

@@ -11,7 +11,7 @@ const KEYS = require('../config').twitter || {
 const client = new Twitter(KEYS);
 const getTime = require('./time');
 
-tweet += `私は今○○をしています。 ${getTime()}`;
+let tweet = `私は今○○をしています。 ${getTime()}`;
 
 let newPath = path.resolve(path.join(__dirname, '../uploads', 'img.png'));
 let data = require('fs').readFileSync(newPath);
