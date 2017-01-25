@@ -56,7 +56,7 @@ const client = (replyToken, SendMessageObject) => {
 http.createServer((req, res) => {    
     if(req.url !== '/' || req.method !== 'POST'){
         res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.end('');
+        res.end(`こんにちは?!: ${process.env.CH_ACCESS_TOKEN} / ${process.env.CH_SECRET} / ${process.env.MC_ID}`);
     }
 
     if(req.method === 'GET'){

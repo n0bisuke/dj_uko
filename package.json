@@ -5,6 +5,7 @@
   "main": "myapp.js",
   "scripts": {
     "start": "node server.js",
+    "deploy": "git add -A && git commit -m 'dj_update' && git push origin master",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
