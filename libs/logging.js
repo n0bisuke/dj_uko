@@ -10,6 +10,6 @@ module.exports = (log) => {
         console.log(log);
         console.log(getTime());
     }else{
-        ds.send({mes:log,time:getTime()});
+        ds.send({debug:log,time:getTime()});
     }
 }

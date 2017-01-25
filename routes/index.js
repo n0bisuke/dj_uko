@@ -30,14 +30,15 @@ router.get('/', (req, res, next) => {
 
 /* POST LINE */
 router.post('/', (req, res, next) => {
-    console.log(req.body);
+    // console.log(req.body);
     res.send('Hello World');
 
     let weo = req.body.events[0]; //weo -> WebhookEventObject    
     //メッセージが送られて来た場合
     if(weo.type === 'message'){
         let SendMessageObject;
-        console.log(weo);
+        // console.log(weo);
+        logging(weo.toString());
         if(weo.message.type === 'text'){
             if(weo.message.text === 'debug:reload'){
                 ds.send({videoId:'リロード'},(err,sended)=>{
