@@ -17,24 +17,25 @@ let newPath = path.resolve(path.join(__dirname, '../uploads', 'img.png'));
 let data = require('fs').readFileSync(newPath);
 // Make post request on media endpoint. Pass file data as media parameter
 
-function upload(){
+function twUpload(cb){
     client.post('media/upload', {media: data}, (error, media, response) => {
         if (!error) {
-        // If successful, a media object will be returned.
-        console.log(media);
-        // Lets tweet it
-        let status = {
-        status: tweet,
-        media_ids: media.media_id_string // Pass the media id string
-        }
+            // If successful, a media object will be returned.
+            console.log(media);
+            // Lets tweet it
+            let status = {
+                status: tweet,
+                media_ids: media.media_id_string // Pass the media id string
+            }
 
-        client.post('statuses/update', status, (error, tweet, response) => {
-        if (!error) {
-            console.log(tweet);
+            client.post('statuses/update', status, (error, tweet, response) => {
+                if (!error) {
+                    console.log(tweet);
+                }
+                cb();
+            });
         }
-        });
-    }
     });
 }
 
-module.exports = upload;
+module.exports = twUpload;

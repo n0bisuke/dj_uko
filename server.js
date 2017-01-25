@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 3000;
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const logging = require('./libs/logging');
+
 const index = require('./routes/index');
 const upload = require('./routes/fileupload');
 
@@ -15,4 +17,4 @@ app.use('/', index);
 app.use('/upload', upload);
 
 app.listen(PORT);
-console.log(`Server running at ${PORT}`);
+logging(`起動! \n Server running at ${PORT}`);

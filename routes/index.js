@@ -1,35 +1,17 @@
 'use strict';
 
-const PORT = process.env.PORT || 3000;
-
 const express = require('express');
 const router = express.Router();
 
-const MilkCocoa = require('milkcocoa');
-const MC_ID = process.env.MC_ID || require(`../config`).MC_ID;
-const milkcocoa = new MilkCocoa(`${MC_ID}.mlkcca.com`);
-const ds = milkcocoa.dataStore('ytdata');
-
 const httpRequest = require('../libs/httpRequest');
-const getTime = require('../libs/time');
-logging(`起動! \n認証情報: ${MC_ID} ${getTime()}`);
-/**
- * ロギング
- */
-function logging(log){
-    if(PORT === 3000){
-        console.log(log);
-    }else{
-        ds.send({mes:log});
-    }
-}
+const ds = require('../modules/milkcocoaAction'); //Milkcocoa呼び出し
 
 //https://www.youtube.com/watch?v=EeRwJsjyoZs -> EeRwJsjyoZs
 function getIdByUrl(url){
     let re = /youtube\.com\/watch\?v=(.*)/i;
     if(url.match(re)){
         let videoId = url.match(re)[1];
-        console.log('IDげと',videoId);
+        console.log('IDげと',videoId);        
         ds.send({videoId:videoId},(err,sended)=>{
             console.log(err,sended);
         });
