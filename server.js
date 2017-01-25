@@ -5,7 +5,6 @@ const MC_ID = process.env.MC_ID || require(`./config`).MC_ID;
 
 const milkcocoa = new MilkCocoa(`${MC_ID}.mlkcca.com`);
 const ds = milkcocoa.dataStore('ytdata');
-ds.send({mes:'起動!'});
 
 const http = require('http');
 const https = require('https');
@@ -19,7 +18,7 @@ const CH_ACCESS_TOKEN = process.env.CH_ACCESS_TOKEN || require(`./config`).CH_AC
 const SIGNATURE = crypto.createHmac('sha256', CH_SECRET);
 const PORT = process.env.PORT || 3000;
 
-console.log('認証情報:',MC_ID,CH_SECRET,CH_ACCESS_TOKEN);
+logging(`起動! \n認証情報: ${MC_ID} / ${CH_SECRET} / ${CH_ACCESS_TOKEN}`);
 
 /**
  * httpリクエスト部分
@@ -141,5 +140,13 @@ function getIdByUrl(url){
     }else{
         console.log('してない');
         return false;
+    }
+}
+
+function logging(log){
+    if(PORT === 3000){
+        console.log(log);
+    }else{
+        ds.send(log);
     }
 }
