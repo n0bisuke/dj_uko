@@ -6,6 +6,8 @@ const router = express.Router();
 const httpRequest = require('../libs/httpRequest');
 const ds = require('../modules/milkcocoaAction'); //Milkcocoa呼び出し
 
+const logging = require('../libs/logging');
+
 //https://www.youtube.com/watch?v=EeRwJsjyoZs -> EeRwJsjyoZs
 function getIdByUrl(url){
     let re = /youtube\.com\/watch\?v=(.*)/i;
@@ -72,6 +74,7 @@ router.post('/', (req, res, next) => {
         },(e)=>{
             console.log(e);
             ds.send({e});
+            
         });
     }
 });
