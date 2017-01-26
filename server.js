@@ -15,11 +15,9 @@ const app = express();
 app.use(timeout('60000s'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(rawBodyParser());
 
 app.use('/', index);
 app.use('/upload', upload);
-
 app.listen(PORT);
 
 logging(`起動! \n Server running at ${PORT} / Node.js v${process.versions.node}`);
