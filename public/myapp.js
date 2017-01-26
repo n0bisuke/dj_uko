@@ -117,8 +117,10 @@ ds.on('send',function(sended,err){
     }
 
     else {
-        console.log(sended.value.videoId);
-        videoList.push(sended.value.videoId);
+        if(sended.value.videoId){
+            console.log(sended.value.videoId);
+            videoList.push(sended.value.videoId);
+        }
     }
     console.log(videoList);
 });
