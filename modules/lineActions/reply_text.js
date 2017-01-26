@@ -7,12 +7,24 @@ const ds = require('../../modules/milkcocoaAction'); //Milkcocoa呼び出し
 
 module.exports = (weo) => {
     let SendMessageObject;
+    ds.send({videoId:'',userId:weo.source.userId}); //userIDを貯める
     
     if(weo.message.text === 'debug:reload'){
         ds.send({videoId:'リロード'},(err,sended)=>{
             console.log(`リロード!!`);
             return;
         });    
+    }
+
+    else if(weo.message.text === '大'){
+        ds.send({videoId:'大'},(err,sended)=>{
+            console.log(`大`);
+            return;
+        });
+        SendMessageObject = [{
+            type: 'text',
+            text: `スキップします`
+        }];
     }
     
     else if(weo.message.text === 'スキップ' || weo.message.text === '現在の曲をスキップします。'){

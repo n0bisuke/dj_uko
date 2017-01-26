@@ -4,14 +4,19 @@ const PORT = process.env.PORT || 3000;
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const timeout = require('connect-timeout');
+
 const logging = require('./libs/logging');
 
 const index = require('./routes/index');
 const upload = require('./routes/fileupload');
 
 const app = express();
+app.use(timeout('60000s'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(rawBodyParser());
+
 app.use('/', index);
 app.use('/upload', upload);
 

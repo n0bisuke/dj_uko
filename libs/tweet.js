@@ -17,7 +17,7 @@ let tweet = `私は今○○をしています。 ${getTime()}`;
 
 function twUpload(cb){
     
-    let newPath = path.resolve(path.join(__dirname, '../uploads', 'img.png'));
+    let newPath = path.resolve(path.join(__dirname, '../uploads', 'img.jpeg'));
     let data = require('fs').readFileSync(newPath);
 
     client.post('media/upload', {media: data}, (error, media, media_res) => {
