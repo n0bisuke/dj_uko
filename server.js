@@ -7,7 +7,6 @@ const bodyParser = require('body-parser');
 const timeout = require('connect-timeout');
 
 const logging = require('./libs/logging');
-
 const index = require('./routes/index');
 const upload = require('./routes/fileupload');
 

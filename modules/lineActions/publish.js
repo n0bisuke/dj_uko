@@ -80,7 +80,7 @@ module.exports = (mes, imageUrl) => {
     // console.log(`----`,userList);
 
     // for(let i = 0, len = userList.length; i<len; i++){
-        httpRequest(`push`, SendMessageObject, {}, 'U56c54d4060eeb9881b18e5523fcec7b3')
+        httpRequest(`push`, SendMessageObject, {}, 'Ra91092a5ce60ad62ac408a148c99c9dc')
         .then((body)=>{
             console.log(body);
         },(e)=>{
