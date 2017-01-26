@@ -21,7 +21,8 @@ router.post('/', (req, res, next) => {
     let cnt = 0;
     req.on('data', (chunk) => {
         buffers.push(chunk);
-        console.log(cnt++);
+        // console.log(cnt++);
+        logging(cnt++);
     });	
     req.on('end', () => {
         req.rawBody = Buffer.concat(buffers);
