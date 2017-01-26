@@ -18,5 +18,4 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', index);
 app.use('/upload', upload);
 app.listen(PORT);
-
-logging(`起動! \n Server running at ${PORT} / Node.js v${process.versions.node}`);
+logging(`起動!! \n Server running at ${PORT} / Node.js v${process.versions.node}`);
