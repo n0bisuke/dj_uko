@@ -67,7 +67,7 @@ module.exports = (weo) => {
                     type: 'postback',
                     label: '[<<]一個前へもどる',
                     data: 'youtubeの何か',
-                    text: 'ざんねん。未実装です。実装してください。https://github.com/n0bisuke/dj_uko'
+                    text: '一つ前の曲に戻ります。'
                 },{
                     type: 'postback',
                     label: '[*]シャッフル',
@@ -75,7 +75,7 @@ module.exports = (weo) => {
                     text: 'シャッフルします。'
                 },{
                     type: 'postback',
-                    label: '[=]一個前へもどる',
+                    label: '[=]夢を叶える',
                     data: 'youtubeの何か',
                     text: 'ざんねん。未実装です。実装してください。https://github.com/n0bisuke/dj_uko'
                 }]

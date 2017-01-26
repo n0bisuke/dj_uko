@@ -59,23 +59,15 @@ function nextPlay(event){
 }
 
 function prevPlay(event){
-    videoIndex = videoIndex - 2;
+    videoIndex = videoIndex - 1;
     videoIndex = videoIndex % videoList.length;
     event.target.loadVideoById(videoList[videoIndex]);
 }
 
 function shufflePlay(event){
-    //シャッフル
-    var n = videoList.length, t, i;
-    while (n) {
-        i = Math.floor(Math.random() * n--);
-        t = array[n];
-        videoList[n] = array[i];
-        videoList[i] = t;
-    }
-
+    var rand = Math.floor( Math.random() * videoList.length);
     videoIndex = videoIndex % videoList.length;
-    event.target.loadVideoById(videoList[videoIndex]);
+    event.target.loadVideoById(videoList[rand]);
 }
 
 
