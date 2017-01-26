@@ -6,15 +6,6 @@ const ds = require('../../modules/milkcocoaAction'); //Milkcocoa呼び出し
 
 let userList = []; //ユーザーリスト
 
-var unique = function(array) {
-    return array.reduce(function(a, b) {
-        if (a.indexOf(b) === -1) {
-            a.push(b);
-        }
-        return a;
-    }, []);
-};
-
 // ds.on('send',(sended,err)=>{
 //     if(!sended.value.userId)return;
 //     userList.push(sended.value.userId);
@@ -31,20 +22,15 @@ module.exports = (mes, imageUrl) => {
                 type: 'buttons',
                 thumbnailImageUrl: imageUrl,
                 title: '浮気現場激写',
-                text: 'ここはどこでしょうか',
+                text: '彼氏がSKYNの箱を開けたようです。ツイートして制裁しますか？',
                 actions: [{
                     type: 'postback',
-                    label: '新宿',
+                    label: 'はい',
                     data: 'youtubeの何か',
                     text: 'URL'
                 },{
                     type: 'postback',
-                    label: 'ニューヨーク',
-                    data: 'youtubeの何か',
-                    text: 'URL'
-                },{
-                    type: 'postback',
-                    label: '深セン',
+                    label: 'いいえ',
                     data: 'youtubeの何か',
                     text: 'URL'
                 }]

@@ -12,7 +12,6 @@ const client = new Twitter(KEYS);
 const getTime = require('./time');
 
 let tweet = `私は今○○をしています。 ${getTime()}`;
-
 // Make post request on media endpoint. Pass file data as media parameter
 
 function twUpload(cb){
@@ -21,24 +20,20 @@ function twUpload(cb){
     let data = require('fs').readFileSync(newPath);
 
     client.post('media/upload', {media: data}, (error, media, media_res) => {
-        if (!error) {
-            // If successful, a media object will be returned.
-            // console.log(media);
-            // Lets tweet it
-            let status = {
-                status: tweet,
-                media_ids: media.media_id_string // Pass the media id string
-            }
+        if(error) return;
 
-            client.post('statuses/update', status, (error, tweet, response) => {
-                if (error) {
-                    console.log(error);
-                    return;   
-                }
-                
-                cb(tweet.extended_entities.media[0].media_url_https);
-            });
+        let status = {
+            status: tweet,
+            media_ids: media.media_id_string // Pass the media id string
         }
+
+        client.post('statuses/update', status, (error, tweet, response) => {
+            if (error) {
+                console.log(error);
+                return;   
+            }
+            cb(tweet.extended_entities.media[0].media_url_https);
+        });
     });
 }
 

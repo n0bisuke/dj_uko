@@ -3,7 +3,6 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
-const contentType = require('content-type')
 
 const twUpload = require('../libs/tweet');
 const linePublish = require('../modules/lineActions/publish');
@@ -25,8 +24,10 @@ router.post('/', (req, res, next) => {
 
     req.on('end', () => {
         req.rawBody = Buffer.concat(buffers);
-        console.log(req.rawBody);        
-        fs.writeFile('./uploads/img.jpeg', req.rawBody, 'utf-8', function (err) {
+        console.log(req.rawBody);
+
+        //書き込み
+        fs.writeFile('./uploads/img.jpeg', req.rawBody, 'utf-8', (err) => {
             res.send('hey uko');
             // up(req,res);
             twUpload((imageUrl)=>{
