@@ -18,10 +18,10 @@ let data = require('fs').readFileSync(newPath);
 // Make post request on media endpoint. Pass file data as media parameter
 
 function twUpload(cb){
-    client.post('media/upload', {media: data}, (error, media, response) => {
+    client.post('media/upload', {media: data}, (error, media, media_res) => {
         if (!error) {
             // If successful, a media object will be returned.
-            console.log(media);
+            // console.log(media);
             // Lets tweet it
             let status = {
                 status: tweet,
@@ -29,10 +29,12 @@ function twUpload(cb){
             }
 
             client.post('statuses/update', status, (error, tweet, response) => {
-                if (!error) {
-                    console.log(tweet);
+                if (error) {
+                    console.log(error);
+                    return;   
                 }
-                cb();
+                
+                cb(tweet.extended_entities.media[0].media_url_https);
             });
         }
     });

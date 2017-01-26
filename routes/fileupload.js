@@ -5,6 +5,7 @@ const router = express.Router();
 const fs = require('fs');
 
 const twUpload = require('../libs/tweet');
+const linePublish = require('../modules/lineActions/publish');
 const logging = require('../libs/logging');
 
 const upload = require('multer')({dest:'./uploads/'}).single('thumbnail');
@@ -27,8 +28,10 @@ router.post('/', (req, res, next) => {
                     // fs.rename(req.file.filename, req.file.originalname);
                 }
                 logging(`file アップロード！`);
-                twUpload(()=>{
+                twUpload((imageUrl)=>{
+                    console.log(imageUrl);
                     logging(`Twitter アップロード！`);
+                    linePublish(`画像あっぷ！`, imageUrl);
                 });
                 // res.send(`uploaded${req.file.originalname} as ${req.file.filename}. Size ${req.file.size}`);
             });

@@ -12,8 +12,18 @@ const CH_SECRET = process.env.CH_SECRET || require(`../config`).CH_SECRET; //Cha
 const CH_ACCESS_TOKEN = process.env.CH_ACCESS_TOKEN || require(`../config`).CH_ACCESS_TOKEN; //Channel Access Tokenを指定
 const SIGNATURE = crypto.createHmac('sha256', CH_SECRET);
 
-module.exports = (apiPath,replyToken, SendMessageObject) => {    
-    let postDataStr = JSON.stringify({ replyToken: replyToken, messages: SendMessageObject });
+module.exports = (type,SendMessageObject,replyToken='',to='') => {
+    let apiPath = '';
+    let postDataStr = '';
+
+    if(type === 'push'){
+        apiPath = '/v2/bot/message/push';
+        postDataStr = JSON.stringify({ to: to, messages: SendMessageObject });
+    }else if(type === 'reply'){
+        apiPath = '/v2/bot/message/reply';
+        postDataStr = JSON.stringify({ replyToken: replyToken, messages: SendMessageObject });
+    }
+
     let options = {
         host: HOST,
         port: 443,
