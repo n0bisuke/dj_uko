@@ -15,24 +15,27 @@ router.get('/', (req, res, next) => {});
 
 /* POST 画像アップロード */
 router.post('/', (req, res, next) => {
+
     upload(req, res, (err) => {
         if(err) {
             // console.log(err);
                logging(`${err}`);
             // res.send("Failed to write " + req.file.destination + " with " + err);
         } else {
-            // console.log(req.file);
+            console.log(req.file);
             fs.rename(req.file.path, `./uploads/img.png`, (err) => {
                 if(err){
                     // fs.unlink(req.file.originalname);
                     // fs.rename(req.file.filename, req.file.originalname);
                 }
                 logging(`file アップロード！`);
+                
                 twUpload((imageUrl)=>{
                     console.log(imageUrl);
                     logging(`Twitter アップロード！`);
                     linePublish(`画像あっぷ！`, imageUrl);
                 });
+
                 // res.send(`uploaded${req.file.originalname} as ${req.file.filename}. Size ${req.file.size}`);
             });
         }

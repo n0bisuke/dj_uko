@@ -58,6 +58,28 @@ function nextPlay(event){
     event.target.loadVideoById(videoList[videoIndex]);
 }
 
+function prevPlay(event){
+    videoIndex = videoIndex - 2;
+    videoIndex = videoIndex % videoList.length;
+    event.target.loadVideoById(videoList[videoIndex]);
+}
+
+function shufflePlay(event){
+    //シャッフル
+    var n = videoList.length, t, i;
+    while (n) {
+        i = Math.floor(Math.random() * n--);
+        t = array[n];
+        videoList[n] = array[i];
+        videoList[i] = t;
+    }
+
+    videoIndex = videoIndex % videoList.length;
+    event.target.loadVideoById(videoList[videoIndex]);
+}
+
+
+
 var errorTimer;
 function startTimer(event){
     errorTimer = setInterval(function(){
@@ -84,11 +106,27 @@ ds.on('send',function(sended,err){
         return;
     }
 
-    if(sended.value.videoId === 'スキップ'){
+    else if(sended.value.videoId === 'スキップ'){
         nextPlay(passEvent);
-        console.log('スキップ');
+        console.log('[スキップ]');
+        return;
     }
-    console.log('うけとり');
-    console.log(sended.value.videoId);
-    videoList.push(sended.value.videoId);
+
+    else if(sended.value.videoId === '前に'){
+        prevPlay(passEvent);
+        console.log('[前に]');
+        return;
+    }
+
+    else if(sended.value.videoId === 'シャッフル'){
+        shufflePlay(passEvent);
+        console.log('[シャッフル]');
+        return;
+    }
+
+    else {
+        console.log(sended.value.videoId);
+        videoList.push(sended.value.videoId);
+    }
+    console.log(videoList);
 });

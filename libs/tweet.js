@@ -13,11 +13,13 @@ const getTime = require('./time');
 
 let tweet = `私は今○○をしています。 ${getTime()}`;
 
-let newPath = path.resolve(path.join(__dirname, '../uploads', 'img.png'));
-let data = require('fs').readFileSync(newPath);
 // Make post request on media endpoint. Pass file data as media parameter
 
 function twUpload(cb){
+    
+    let newPath = path.resolve(path.join(__dirname, '../uploads', 'img.png'));
+    let data = require('fs').readFileSync(newPath);
+
     client.post('media/upload', {media: data}, (error, media, media_res) => {
         if (!error) {
             // If successful, a media object will be returned.

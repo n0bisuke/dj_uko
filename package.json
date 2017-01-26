@@ -11,6 +11,9 @@
   },
   "keywords": [],
   "author": "",
+  "engines" : {
+    "node":">6.0.0"
+  },
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.16.0",
