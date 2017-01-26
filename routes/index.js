@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 
 const lineAction = require('../modules/lineActions/main');
-
 const logging = require('../libs/logging');
 const ds = require('../modules/milkcocoaAction'); //Milkcocoa呼び出し
 
