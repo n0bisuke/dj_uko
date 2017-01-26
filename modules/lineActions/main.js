@@ -5,7 +5,7 @@ const textMes = require('./reply_text');
 
 module.exports = (req, res, next) =>{
     let weo = req.body.events[0]; //weo -> WebhookEventObject    
-    logging(weo.toString());
+    logging(weo);
     //テキストメッセージが送られて来た場合
     if(weo.type === 'message'){
         textMes(weo);

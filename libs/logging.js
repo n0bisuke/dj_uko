@@ -10,6 +10,12 @@ module.exports = (log) => {
         console.log(log);
         console.log(getTime());
     }else{
-        ds.send({debug:log,time:getTime()});
+        let result;
+        if(typeof(log) == 'object'){
+            result = JSON.stringify(log);
+        }else{
+            result = log;
+        }
+        ds.send({debug:result,time:getTime()});
     }
 }
