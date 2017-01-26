@@ -17,4 +17,4 @@ app.use('/upload', upload);
 
 app.listen(PORT);
 
-logging(`起動! \n Server running at ${PORT}`);
+logging(`起動! \n Server running at ${PORT} / Node.js v${process.versions.node}`);
