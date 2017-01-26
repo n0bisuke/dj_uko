@@ -36,7 +36,8 @@ module.exports = (weo) => {
             SendMessageObject = [];
         }
     }
-    httpRequest(weo.replyToken, SendMessageObject)
+    
+    httpRequest(`/v2/bot/message/reply`,weo.replyToken, SendMessageObject)
     .then((body)=>{
         console.log(body);
     },(e)=>{

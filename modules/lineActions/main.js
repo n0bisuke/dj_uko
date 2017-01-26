@@ -1,7 +1,7 @@
 'use strict';
 
 const logging = require('../../libs/logging');
-const textMes = require('./text');
+const textMes = require('./reply_text');
 
 module.exports = (req, res, next) =>{
     let weo = req.body.events[0]; //weo -> WebhookEventObject    
