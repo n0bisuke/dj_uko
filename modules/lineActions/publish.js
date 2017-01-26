@@ -8,7 +8,7 @@ module.exports = (mes, imageUrl) => {
     if(imageUrl){
         SendMessageObject = [{
             type: 'template',
-            altText: 'うこぴっぴ',
+            altText: 'お使いの端末でご覧いただけません。',
             template: {
                 type: 'buttons',
                 thumbnailImageUrl: imageUrl,
