@@ -72,6 +72,7 @@ module.exports = (weo) => {
             else {
                 let columns = [];
                 for(let item of result.items){
+                    if(item.snippet.description == '') item.snippet.description = '詳細無し';
                     columns.push({
                         thumbnailImageUrl: item.snippet.thumbnails.medium.url,
                         title: item.snippet.title.substring(0,40),
@@ -79,8 +80,8 @@ module.exports = (weo) => {
                         actions: [{
                             type: 'postback',
                             label: 'この曲を再生する',
-                            data: item.id.videoId,
-                            text: `${item.snippet.title}をリストに追加します。`
+                            data: `videoId is ${item.id.videoId}`,
+                            text: `${item.snippet.title}をリストに追加します。 youtu.be/${item.id.videoId}`
                         }]
                     });
                 }
@@ -159,5 +160,5 @@ module.exports = (weo) => {
             ds.send({e});
         });
 
-    },5000);
+    },1000);
 }
