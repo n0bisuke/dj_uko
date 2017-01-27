@@ -16,6 +16,7 @@ router.post('/', (req, res, next) => {
     logging('\n\n\nぽすと');
     let buffers = [];
     let cnt = 0;
+
     req.on('data', (chunk) => {
         buffers.push(chunk);
         // console.log(cnt++);
