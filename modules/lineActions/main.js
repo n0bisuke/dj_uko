@@ -30,7 +30,7 @@ module.exports = (req, res, next) =>{
     }else if(weo.type === 'postback'){
 
     }else if(weo.type === 'beacon'){
-
+        logging('----ble---!');
     }
 }
 
