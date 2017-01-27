@@ -1,6 +1,7 @@
 'use strict';
 
 const logging = require('../../libs/logging');
+const youtube = require('../../libs/youtube');
 const httpRequest = require('../../libs/httpRequest');
 const getIdByUrl = require('../../libs/getIdByUrl');
 const ds = require('../../modules/milkcocoaAction'); //Milkcocoa呼び出し
@@ -60,7 +61,45 @@ module.exports = (weo) => {
             text: `一つ前に戻ります。`
         }];
     }
-    
+
+    else if(weo.message.text.match(/(.*)を検索/i)){
+        let keyword = weo.message.text.match(/(.*)を検索/i)[1];
+        console.log(keyword);
+        youtube(keyword, 5, (error, result) => {
+            if(error){
+                console.log('エラー?',error);
+            }
+            else {
+                let columns = [];
+                for(let item of result.items){
+                    columns.push({
+                        thumbnailImageUrl: item.snippet.thumbnails.medium.url,
+                        title: item.snippet.title.substring(0,40),
+                        text: item.snippet.description.substring(0,60),
+                        actions: [{
+                            type: 'postback',
+                            label: 'この曲を再生する',
+                            data: item.id.videoId,
+                            text: `${item.snippet.title}をリストに追加します。`
+                        }]
+                    });
+                }
+                console.log(columns);
+
+                SendMessageObject = [{
+                    type: 'template',
+                    altText: 'お使いの端末でご覧いただけません。',
+                    template: {
+                        type: 'carousel',
+                        columns: columns
+                    }
+                }];
+                // cb(columns);
+                //console.log(columns);
+            }
+        });
+    }
+
     else if(weo.message.text === 'リモコン'){
         SendMessageObject = [{
             type: 'template',
@@ -110,12 +149,15 @@ module.exports = (weo) => {
         }
     }
     
-    httpRequest(`reply`, SendMessageObject, weo.replyToken)
-    .then((body)=>{
-        console.log(body);
-    },(e)=>{
-        console.log(e);
-        ds.send({e});
-        
-    });
+    setTimeout(()=>{
+        console.log(`どうだい:`,SendMessageObject);
+        httpRequest(`reply`, SendMessageObject, weo.replyToken)
+        .then((body)=>{
+            console.log(body);
+        },(e)=>{
+            console.log(e);
+            ds.send({e});
+        });
+
+    },5000);
 }
