@@ -21,8 +21,8 @@ module.exports = (mes, imageUrl) => {
             template: {
                 type: 'buttons',
                 thumbnailImageUrl: imageUrl,
-                title: '浮気現場激写',
-                text: '彼氏がSKYNの箱を開けたようです。ツイートして制裁しますか？',
+                title: '【速報】浮気をしています',
+                text: '彼氏がコンドームを開けたようです。ツイートして制裁しますか？',
                 actions: [{
                     type: 'postback',
                     label: 'はい',
