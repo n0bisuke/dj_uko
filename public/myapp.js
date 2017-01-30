@@ -4,6 +4,8 @@
  *古いスマホでの動作を予定。 ES2015的な書き方は一部しかできないかも
  */
 
+console.log(111);
+
 //Milkcocoa
 var milkcocoa = new MilkCocoa('woodilrg1cz3.mlkcca.com');
 var ds = milkcocoa.dataStore('ytdata');
@@ -28,12 +30,13 @@ function onYouTubeIframeAPIReady() {
         events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
-        }
+        },
     });
 }
 
 function onPlayerReady(event) {
     player.setLoop(true);
+    player.setVolume(50); //音量を半分にしてスタート
     event.target.playVideo();
 }
 
@@ -91,6 +94,34 @@ function stopTimer(){
     clearInterval(errorTimer);
 }
 
+//音量をあげる
+function vlumeUp(){
+    var vol = player.getVolume();
+    vol += 10;
+    player.setVolume(vol);
+}
+
+//音量を下げる
+function vlumeDown(){
+    var vol = player.getVolume();
+    vol -= 10;
+    player.setVolume(vol);
+}
+
+//再生速度アップ
+function speedUp(){
+    var speed = player.getPlaybackRate();
+    speed += 0.5;
+    player.setPlaybackRate(speed);
+}
+
+//再生速度ダウン
+function speedDown(){
+    var speed = player.getPlaybackRate();
+    speed -= 0.5;
+    player.setPlaybackRate(speed);
+}
+
 //リスト更新
 ds.on('send',function(sended,err){
     if(sended.value.videoId === 'リロード'){
@@ -116,6 +147,33 @@ ds.on('send',function(sended,err){
         return;
     }
 
+    else if(sended.value.videoId === '+'){
+        vlumeUp();
+        console.log('[ボリュームUP]');
+        return;
+    }
+
+    else if(sended.value.videoId === '-'){
+        vlumeDown();
+        console.log('[ボリュームDown]');
+        return;
+    }
+
+    else if(sended.value.videoId === '↑'){
+        speedUp();
+        console.log('[スピードUP]');
+        return;
+    }
+
+    else if(sended.value.videoId === '↓'){
+        speedDown();
+        console.log('[スピードDown]');
+        return;
+    }
+
+    
+
+
     else {
         if(sended.value.videoId){
             console.log(sended.value.videoId);
@@ -124,3 +182,4 @@ ds.on('send',function(sended,err){
     }
     console.log(videoList);
 });
+

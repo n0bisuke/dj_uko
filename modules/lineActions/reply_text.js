@@ -7,6 +7,7 @@ const getIdByUrl = require('../../libs/getIdByUrl');
 const ds = require('../../modules/milkcocoaAction'); //Milkcocoa呼び出し
 
 module.exports = (weo) => {
+
     let SendMessageObject;
     ds.send({videoId:'',userId:weo.source.userId}); //userIDを貯める
     
@@ -25,6 +26,50 @@ module.exports = (weo) => {
         SendMessageObject = [{
             type: 'text',
             text: `スキップします`
+        }];
+    }
+
+    else if(weo.message.text === '+'){
+        ds.send({videoId:'+'},(err,sended)=>{
+            console.log(`+!!`);
+            return;
+        });
+        SendMessageObject = [{
+            type: 'text',
+            text: `音量をあげます`
+        }];
+    }
+
+    else if(weo.message.text === '-'){
+        ds.send({videoId:'-'},(err,sended)=>{
+            console.log(`-!!`);
+            return;
+        });
+        SendMessageObject = [{
+            type: 'text',
+            text: `音量をさげます。`
+        }];
+    }
+
+    else if(weo.message.text === '↑'){
+        ds.send({videoId:'↑'},(err,sended)=>{
+            console.log(`↑!!`);
+            return;
+        });
+        SendMessageObject = [{
+            type: 'text',
+            text: `再生スピードをあげます。`
+        }];
+    }
+
+    else if(weo.message.text === '↓'){
+        ds.send({videoId:'↓'},(err,sended)=>{
+            console.log(`↓!!`);
+            return;
+        });
+        SendMessageObject = [{
+            type: 'text',
+            text: `再生スピードを下げます。`
         }];
     }
     
