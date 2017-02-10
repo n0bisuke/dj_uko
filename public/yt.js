@@ -4,8 +4,6 @@
  *古いスマホでの動作を予定。 ES2015的な書き方は一部しかできないかも
  */
 
-console.log(111);
-
 //Milkcocoa
 var milkcocoa = new MilkCocoa('woodilrg1cz3.mlkcca.com');
 var ds = milkcocoa.dataStore('ytdata');
@@ -17,7 +15,7 @@ const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var player;
-var videoList = ['PDSkFeMVNFs','ZFoJYI7Q4iA']; 
+var videoList = ['oCrwzN6eb4Q','PCp2iXA1uLE']; 
 var videoIndex = 0;
 var error_count = 0; //不正なIDが来て読み込めない場合
 var passEvent;
@@ -171,9 +169,6 @@ ds.on('send',function(sended,err){
         return;
     }
 
-    
-
-
     else {
         if(sended.value.videoId){
             console.log(sended.value.videoId);
@@ -182,4 +177,3 @@ ds.on('send',function(sended,err){
     }
     console.log(videoList);
 });
-

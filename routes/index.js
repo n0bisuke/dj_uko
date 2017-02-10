@@ -10,7 +10,7 @@ const ds = require('../modules/milkcocoaAction'); //Milkcocoa呼び出し
 /* GET home page. */
 router.get('/', (req, res, next) => {
     logging(`top page / GET`);
-    res.send(`top page / GET`);
+    res.sendfile('index.html');
 });
 
 /* POST LINE */
