@@ -5,6 +5,8 @@ const youtube = require('../../libs/youtube');
 const httpRequest = require('../../libs/httpRequest');
 const getIdByUrl = require('../../libs/getIdByUrl');
 const ds = require('../../modules/milkcocoaAction'); //Milkcocoa呼び出し
+const wio = require('../../libs/wionode');
+const co = require('co');
 
 module.exports = (weo) => {
     let SendMessageObject;
@@ -106,7 +108,25 @@ module.exports = (weo) => {
         }];
     }
 
-    else if(weo.message.text.match(/(.*)を検索/i)){
+    else if(weo.message.type === 'sticker' && weo.message.packageId === '1376377'){
+        let mes = '照明';
+        co(function *(){
+            let wioFlag = 0;
+            let res = yield wio.getRelay();
+            // console.log(`りれー: ${res.data.onoff}`);
+            wioFlag = (res.data.onoff === 0) ? 1 : 0;
+            res = yield wio.relay(wioFlag);
+            console.log(res.data);
+            // if(wioFlag) mes = '照明on';
+        }).catch((err)=>{
+            console.log(err);
+            mes = 'APIエラー';
+        });
+
+        SendMessageObject = [{type: 'text',text: mes}];
+    }
+
+    else if(weo.message.type==='text' && weo.message.text.match(/(.*)を検索/i)){
         let keyword = weo.message.text.match(/(.*)を検索/i)[1];
         console.log(keyword);
         youtube(keyword, 5, (error, result) => {

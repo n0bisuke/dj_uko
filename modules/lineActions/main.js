@@ -9,16 +9,6 @@ module.exports = (req, res, next) =>{
     //テキストメッセージが送られて来た場合
     if(weo.type === 'message'){
         textMes(weo);
-    }else if(weo.type === 'image'){
-
-    }else if(weo.type === 'video'){
-
-    }else if(weo.type === 'audio'){
-
-    }else if(weo.type === 'location'){
-
-    }else if(weo.type === 'sticker'){
-
     }else if(weo.type === 'follow'){
 
     }else if(weo.type === 'unfollow'){
