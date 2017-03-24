@@ -3,7 +3,7 @@
 const axios = require('axios');
 const co = require('co');
 
-const TOKEN = require('../config').WIONODE.TOKEN;
+const TOKEN = process.env.wionode_token || require('../config').WIONODE.TOKEN;
 const BASE_URL = 'https://us.wio.seeed.io/v1/node';
 let flag = 1;
 
